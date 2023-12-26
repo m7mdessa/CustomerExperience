@@ -1,0 +1,6 @@
+@CustomerExperience.Start_HostAddress = http://localhost:5036
+
+GET {{CustomerExperience.Start_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
