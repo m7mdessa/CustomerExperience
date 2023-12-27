@@ -9,6 +9,7 @@ namespace CustomerExperience.Domain.CategoryAggregate
 {
     public class Post:BaseEntity
     {
+        #region Members
         public string Title { get; private set; }
         public string Content { get; private set; }
         public DateTime PublishDate { get; private set; } = DateTime.Now;
@@ -17,7 +18,9 @@ namespace CustomerExperience.Domain.CategoryAggregate
 
         public List<PostInteraction> _postInteractions { get; private set; } = new List<PostInteraction>();
         public Category? category { get; private set; }
+        #endregion
 
+        #region Constructors
         private Post() { }
         internal Post(string title, string content)
         {
@@ -27,11 +30,22 @@ namespace CustomerExperience.Domain.CategoryAggregate
             //BlogId = blogId;
         }
 
+        #endregion
+
+        #region Internal Methods
         internal void UpdatePost(int id, string? title, string? content)
         {
             Id = id;
             Title = title;
             Content = content;
         }
+        
+
+        internal void Interact(PostInteraction postInteraction)
+        {
+            _postInteractions.Add(postInteraction);
+        }
+
+        #endregion
     }
 }

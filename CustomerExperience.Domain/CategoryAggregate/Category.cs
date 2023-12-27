@@ -17,7 +17,6 @@ namespace CustomerExperience.Domain.CategoryAggregate
 
         #endregion
 
-
         #region Constructors
         private Category() { _posts = new List<Post>(); }
 
@@ -25,7 +24,7 @@ namespace CustomerExperience.Domain.CategoryAggregate
 
         #endregion
 
-        #region CategoryMethods
+        #region Public Methods
 
         public void DeleteCategory(int id)
         {
@@ -39,9 +38,7 @@ namespace CustomerExperience.Domain.CategoryAggregate
             Name = name;
         }
 
-        #endregion
 
-        #region PostMethods
         public void Post(string title , string content)
         {
             var addPost = new Post(title, content);

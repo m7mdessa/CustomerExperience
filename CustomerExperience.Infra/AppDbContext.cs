@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CustomerExperience.Domain.CategoryAggregate;
+using CustomerExperience.Domain.CustomerAggregate;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CustomerExperience.Infra
@@ -15,9 +17,9 @@ namespace CustomerExperience.Infra
         {
         }
 
-        //public DbSet<Project> Projects { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-        //public DbSet<Developer> Developers { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
