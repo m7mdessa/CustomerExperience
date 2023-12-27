@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerExperience.Application\CustomerExperience.Application.csproj" />
+    <ProjectReference Include="..\CustomerExperience.Infra\CustomerExperience.Infra.csproj" />
     <ProjectReference Include="..\CustomerExperience.Presentation.API\CustomerExperience.Presentation.API.csproj" />
   </ItemGroup>
 
