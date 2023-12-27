@@ -1,4 +1,7 @@
-﻿using CustomerExperience.Domain.Shared;
+﻿
+
+using CustomerExperience.Domain.Shared;
+using Microsoft.VisualBasic;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
