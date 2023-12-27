@@ -1,6 +1,4 @@
-﻿
-
-namespace CustomerExperience.Domain.Shared
+﻿namespace CustomerExperience.Domain.Shared
 {
     public interface IFullAuditedObject
     {

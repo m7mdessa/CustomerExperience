@@ -1,6 +1,6 @@
-﻿
+﻿using CustomerExperience.Domain.Shared;
 
-namespace CustomerExperience.Domain.OrderAggregate
+namespace CustomerExperience.Domain.CustomerAggregate
 {
     public class Address : ValueObject
     {
