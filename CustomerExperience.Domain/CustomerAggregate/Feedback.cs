@@ -4,24 +4,40 @@ namespace CustomerExperience.Domain.CustomerAggregate
 {
     public class Feedback :BaseEntity
     {
-        public int FeedbackID { get; private set; }
-        public int CustomerID { get; private set; }
-        public DateTime Timestamp { get; private set; }
-        public string FeedbackText { get; private set; }
 
-        public Customer Customer { get; private set; }
 
+        #region Constructors
 
         private Feedback()
         {
         }
-
-        internal Feedback(int feedbackID, int customerID, DateTime timestamp, string feedbackText)
+        internal Feedback( int customerId, DateTime feedbackDate, string feedbackText)
         {
-            FeedbackID = feedbackID;
-            CustomerID = customerID;
-            Timestamp = timestamp;
+            CustomerId = customerId;
+            FeedbackDate = feedbackDate;
             FeedbackText = feedbackText;
         }
+        #endregion
+
+
+        #region Internal Methods
+        internal void Update(int customerId, DateTime feedbackDate, string feedbackText)
+        {
+            CustomerId = customerId;
+            FeedbackDate = feedbackDate;
+            FeedbackText = feedbackText;
+        }
+
+
+        #endregion
+
+        #region Members
+        public int CustomerId { get; private set; }
+        public DateTime FeedbackDate { get; private set; }
+        public string FeedbackText { get; private set; }
+
+        public Customer Customer { get; private set; }
+        #endregion
+
     }
 }
