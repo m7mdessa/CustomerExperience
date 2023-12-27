@@ -1,5 +1,4 @@
-﻿
-using CustomerExperience.Domain.Shared;
+﻿using CustomerExperience.Domain.Shared;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
@@ -8,9 +7,7 @@ namespace CustomerExperience.Domain.CustomerAggregate
     
     
     
-    
-    
-    
+  
     }
 
 

@@ -1,7 +1,6 @@
 ﻿
 
 using CustomerExperience.Domain.Shared;
-using Microsoft.VisualBasic;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
@@ -62,12 +61,10 @@ namespace CustomerExperience.Domain.CustomerAggregate
             feedBack?.Update(customerId, feedbackDate, feedbackText);
         }
 
-        public void RemoveMilestone(Feedback feedBack)
+        public void RemoveFeedback(Feedback feedBack)
         {
             _feedbacks.Remove(feedBack);
         }
-
-
 
 
 
