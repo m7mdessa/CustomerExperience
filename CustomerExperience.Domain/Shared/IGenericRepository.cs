@@ -1,5 +1,4 @@
-﻿using Domain.SharedKernel;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace CustomerExperience.Domain.Shared
 {
@@ -7,7 +6,6 @@ namespace CustomerExperience.Domain.Shared
     {
         Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] includeExpressions);
         Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includeExpressions);
-
         Task<T> GetAsync(int id);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
