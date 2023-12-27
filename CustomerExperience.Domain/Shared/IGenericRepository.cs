@@ -1,5 +1,4 @@
-﻿using Domain.SharedKernel;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace CustomerExperience.Domain.Shared
 {

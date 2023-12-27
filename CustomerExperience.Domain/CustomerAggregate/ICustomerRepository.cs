@@ -1,10 +1,19 @@
 ﻿
+using CustomerExperience.Domain.Shared;
+
 namespace CustomerExperience.Domain.CustomerAggregate
 {
-    public class ICustomerRepository
+    public interface ICustomerRepository : IGenericRepository<Customer>
     {
-
-
-
+    
+    
+    
+    
+    
+    
     }
+
+
+
+    
 }
