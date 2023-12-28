@@ -10,7 +10,6 @@ namespace CustomerExperience.Domain.CategoryAggregate
         public string Title { get; private set; }
         public string Content { get; private set; }
         public DateTime PublishDate { get; private set; } = DateTime.Now;
-        public int CategoryId { get; private set; }
 
         private readonly List<PostInteraction> _postInteractions = new();
         public virtual IReadOnlyCollection<PostInteraction> PostInteractions => _postInteractions;
