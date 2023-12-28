@@ -35,7 +35,7 @@ namespace CustomerExperience.Domain.RoleAggregate
 
         public void UpdateUserInfo(string username, string password, int roleId, int id, int customerId)
         {
-            var user = _users?.SingleOrDefault(s => s.Id == id);
+            var user = _users?.FirstOrDefault(s => s.Id == id);
             if (user != null)
             {
                 user.UpdateUserInfo(username, password, roleId, id, customerId);
