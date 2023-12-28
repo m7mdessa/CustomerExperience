@@ -18,6 +18,7 @@ namespace CustomerExperience.Application.Commands.Posts.DeletePost
             var postToDelete = await _postRepository.GetAsync(command.Id);
             postToDelete.RemovePost(command.Id);
             await _postRepository.DeleteAsync(postToDelete);
+            await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }
     }

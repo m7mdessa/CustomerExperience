@@ -7,7 +7,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Dele
 {
     
 
-    internal sealed class DeleteServiceRequestCommandHandler : IRequestHandler<DeleteServiceRequestCommand, int>
+    internal sealed class DeleteServiceRequestCommandHandler : IRequestHandler<DeleteServiceRequestCommand, Unit>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Dele
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(DeleteServiceRequestCommand command, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteServiceRequestCommand command, CancellationToken cancellationToken)
         {
 
             var customer = await _customerRepository.GetByIdAsync(command.CustomerId, fb => fb.Feedbacks);
@@ -31,7 +31,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Dele
             await _customerRepository.UpdateAsync(customer);
             await _unitOfWork.SaveChangesAsync();
 
-            return customer.Id;
+            return Unit.Value;
 
 
 

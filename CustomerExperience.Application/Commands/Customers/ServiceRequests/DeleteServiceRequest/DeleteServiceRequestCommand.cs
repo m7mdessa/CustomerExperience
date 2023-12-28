@@ -4,7 +4,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Dele
 {
    
 
-    public class DeleteServiceRequestCommand : IRequest<int>
+    public class DeleteServiceRequestCommand : IRequest<Unit>
     {
         public int Id { get; set; }
 

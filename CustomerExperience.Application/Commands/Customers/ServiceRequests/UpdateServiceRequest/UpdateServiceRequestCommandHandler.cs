@@ -6,7 +6,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Upda
 {
  
 
-    internal sealed class UpdateServiceRequestCommandHandler : IRequestHandler<UpdateServiceRequestCommand, int>
+    internal sealed class UpdateServiceRequestCommandHandler : IRequestHandler<UpdateServiceRequestCommand, Unit>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +18,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Upda
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(UpdateServiceRequestCommand command, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateServiceRequestCommand command, CancellationToken cancellationToken)
         {
 
             var customer = await _customerRepository.GetByIdAsync(command.CustomerId, fb => fb.Feedbacks);
@@ -35,7 +35,7 @@ namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.Upda
             await _customerRepository.UpdateAsync(customer);
             await _unitOfWork.SaveChangesAsync();
 
-            return customer.Id;
+            return Unit.Value;
 
 
 

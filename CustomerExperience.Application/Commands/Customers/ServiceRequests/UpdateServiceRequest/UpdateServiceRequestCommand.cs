@@ -3,7 +3,7 @@
 namespace CustomerExperience.Application.Commands.Customers.ServiceRequests.UpdateServiceRequest
 {
  
-    public class UpdateServiceRequestCommand : IRequest<int>
+    public class UpdateServiceRequestCommand : IRequest<Unit>
     {
         public int Id { get; set; }
 
