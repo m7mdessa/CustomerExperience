@@ -46,19 +46,19 @@ namespace CustomerExperience.Domain.PostAggregate
 
         #region Post Interaction Methods
 
-        internal void Interact(int customerId, InteractionType type, int postId)
+        public void Interact(int customerId, InteractionType type, int postId)
         {
             var postInteraction = new PostInteraction(customerId, type, postId);
             _postInteractions.Add(postInteraction);
         }
 
-        internal void UpdateInteract(int id, int customerId, InteractionType type, int postId)
+        public void UpdateInteract(int id, int customerId, InteractionType type, int postId)
         {
             var postInteraction = _postInteractions.FirstOrDefault(x => x.Id == id);
             postInteraction.UpdatePostInteraction(id, customerId, type, postId);
         }
 
-        internal void RemoveInteract(int id)
+        public void RemoveInteract(int id)
         {
             var postInteraction= _postInteractions?.FirstOrDefault(x => x.Id == id);
             _postInteractions.Remove(postInteraction);
