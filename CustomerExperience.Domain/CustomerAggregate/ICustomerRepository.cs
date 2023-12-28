@@ -4,13 +4,6 @@ namespace CustomerExperience.Domain.CustomerAggregate
 {
     public interface ICustomerRepository : IGenericRepository<Customer>
     {
-    
-    
-    
-  
-    }
 
-
-
-    
+    }  
 }
