@@ -16,7 +16,7 @@ namespace CustomerExperience.Application.Commands.Posts.DeletePost
         public async Task<Unit> Handle(DeletePostCommand command, CancellationToken cancellationToken)
         {
             var postToDelete = await _postRepository.GetAsync(command.Id);
-            postToDelete.DeletePost(command.Id);
+            postToDelete.RemovePost(command.Id);
             await _postRepository.DeleteAsync(postToDelete);
             return Unit.Value;
         }

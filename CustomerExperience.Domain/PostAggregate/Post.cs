@@ -35,7 +35,7 @@ namespace CustomerExperience.Domain.PostAggregate
             Content = content;
         }
 
-        internal void RemovePost(int id)
+        public void RemovePost(int id)
 
         {
             var deletePost = _postInteractions?.SingleOrDefault(s => s.Id == id);
