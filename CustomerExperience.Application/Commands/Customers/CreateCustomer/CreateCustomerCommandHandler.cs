@@ -1,4 +1,6 @@
 ﻿using CustomerExperience.Domain.CustomerAggregate;
+using CustomerExperience.Domain.PostAggregate;
+using CustomerExperience.Packages;
 using MediatR;
 
 namespace CustomerExperience.Application.Commands.Customers.CreateCustomer
@@ -7,12 +9,13 @@ namespace CustomerExperience.Application.Commands.Customers.CreateCustomer
     internal sealed class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, int>
     {
         private readonly ICustomerRepository _customerRepository;
-   
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateCustomerCommandHandler(ICustomerRepository customerRepository)
+
+        public CreateCustomerCommandHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
-          
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<int> Handle(CreateCustomerCommand command,CancellationToken cancellationToken)
@@ -33,7 +36,12 @@ namespace CustomerExperience.Application.Commands.Customers.CreateCustomer
             );
 
             await _customerRepository.AddAsync(customer);
-            return customer.id;
+            await _unitOfWork.SaveChangesAsync();
+
+            return customer.Id;
+
+
+
         }
     }
 
