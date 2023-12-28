@@ -17,7 +17,7 @@ namespace CustomerExperience.Domain.CategoryAggregate
 
         #region Constructors
         private Post() { }
-        internal Post(string title, string content)
+        public Post(string title, string content)
         {
             Title = title;
             Content = content;
