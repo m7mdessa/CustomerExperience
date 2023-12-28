@@ -1,11 +1,10 @@
 ﻿using CustomerExperience.Domain.Shared;
-using CustomerExperience.Infra;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using CustomerExperience.Packages;
 
 
-namespace Infrastructure.Repositories
+namespace CustomerExperience.Infra.Repositories
 {
     public class RepositoryBase<T> : IGenericRepository<T> where T : BaseEntity
     {
@@ -31,7 +30,7 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-  
+
         public async Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] includeExpressions)
         {
             IQueryable<T> query = _context.Set<T>().AsNoTracking();
@@ -55,7 +54,7 @@ namespace Infrastructure.Repositories
 
             return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
- 
+
         public async Task<T> GetAsync(int id)
         {
             return await _context.Set<T>().FirstOrDefaultAsync(q => q.Id == id);

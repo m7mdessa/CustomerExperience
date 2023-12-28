@@ -1,5 +1,4 @@
-﻿
-using CustomerExperience.Packages;
+﻿using CustomerExperience.Packages;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
@@ -24,6 +23,7 @@ namespace CustomerExperience.Domain.CustomerAggregate
             Email = email;
             PhoneNumber = phoneNumber;
             Address = address;
+         
   
         }
 
@@ -45,6 +45,17 @@ namespace CustomerExperience.Domain.CustomerAggregate
         #endregion
 
         #region Public Methods
+
+        public void UpdateCustomer(int id ,string firstName, string lastName, string email, string phoneNumber, Address address)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Address = address;
+        }
+
         public void AddFeedback(int customerId, DateTime feedbackDate, string feedbackText)
         {
 

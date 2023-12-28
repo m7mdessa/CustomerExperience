@@ -1,16 +1,13 @@
-﻿
-using CustomerExperience.Domain.CustomerAggregate;
-using CustomerExperience.Packages;
+﻿using CustomerExperience.Packages;
 
-namespace CustomerExperience.Domain.CategoryAggregate
+namespace CustomerExperience.Domain.PostAggregate
 {
-    public class Post: AuditableEntity
+    public class Post : AuditableEntity
     {
         #region Members
         public string Title { get; private set; }
         public string Content { get; private set; }
-        public DateTime PublishDate { get; private set; } = DateTime.Now;
-        public int CategoryId { get; private set; }
+        public DateTime PublishDate { get; private set; } 
 
         private readonly List<PostInteraction> _postInteractions = new();
         public virtual IReadOnlyCollection<PostInteraction> PostInteractions => _postInteractions;
@@ -22,6 +19,7 @@ namespace CustomerExperience.Domain.CategoryAggregate
         {
             Title = title;
             Content = content;
+            PublishDate = DateTime.UtcNow;
         }
 
         #endregion
@@ -35,8 +33,8 @@ namespace CustomerExperience.Domain.CategoryAggregate
             Title = title;
             Content = content;
         }
-        
-        internal void DeletePost(int id)
+
+        internal void RemovePost(int id)
         {
             var deletePost = _postInteractions?.SingleOrDefault(s => s.Id == id);
             _postInteractions?.Remove(deletePost);
@@ -52,17 +50,19 @@ namespace CustomerExperience.Domain.CategoryAggregate
             _postInteractions.Add(postInteraction);
         }
 
-        internal void UpdateInteract(int id ,int customerId, InteractionType type, int postId)
+        internal void UpdateInteract(int id, int customerId, InteractionType type, int postId)
         {
-            var postById = _postInteractions.FirstOrDefault(x => x.Id == postId);
-            postById.UpdatePostInteraction(id,customerId,type,postId);
+            var postInteraction = _postInteractions.FirstOrDefault(x => x.Id == id);
+            postInteraction.UpdatePostInteraction(id, customerId, type, postId);
         }
 
-        internal void DeleteInteract(int postId)
+        internal void RemoveInteract(int id)
         {
-            var getPostInteractionById = _postInteractions?.FirstOrDefault(x => x.Id == postId);
-            _postInteractions.Remove(getPostInteractionById);
+            var postInteraction= _postInteractions?.FirstOrDefault(x => x.Id == id);
+            _postInteractions.Remove(postInteraction);
         }
+
+
         #endregion
 
         #endregion

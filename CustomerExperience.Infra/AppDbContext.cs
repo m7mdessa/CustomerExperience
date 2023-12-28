@@ -1,4 +1,4 @@
-﻿using CustomerExperience.Domain.CategoryAggregate;
+﻿using CustomerExperience.Domain.PostAggregate;
 using CustomerExperience.Domain.CustomerAggregate;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +19,7 @@ namespace CustomerExperience.Infra
 
         public DbSet<Customer> Customers { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

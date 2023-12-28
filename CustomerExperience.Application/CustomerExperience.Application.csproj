@@ -18,4 +18,8 @@
     <ProjectReference Include="..\CustomerExperience.Domain\CustomerExperience.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Customers\UpdateCustomer\" />
+  </ItemGroup>
+
 </Project>
