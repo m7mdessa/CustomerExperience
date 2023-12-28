@@ -1,5 +1,4 @@
-﻿
-using CustomerExperience.Packages;
+﻿using CustomerExperience.Packages;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
@@ -22,6 +21,7 @@ namespace CustomerExperience.Domain.CustomerAggregate
             Email = email;
             PhoneNumber = phoneNumber;
             Address = address;
+         
   
         }
 
@@ -42,6 +42,17 @@ namespace CustomerExperience.Domain.CustomerAggregate
         #endregion
 
         #region Public Methods
+
+        public void UpdateCustomer(int id ,string firstName, string lastName, string email, string phoneNumber, Address address)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Address = address;
+        }
+
         public void AddFeedback(int customerId, DateTime feedbackDate, string feedbackText)
         {
 
@@ -49,12 +60,12 @@ namespace CustomerExperience.Domain.CustomerAggregate
 
             _feedbacks.Add(feedBack);
         }
-        public void UpdateFeedback(int customerId, DateTime feedbackDate, string feedbackText)
+        public void UpdateFeedback(int id, int customerId, DateTime feedbackDate, string feedbackText)
         {
-            var feedBack = _feedbacks.FirstOrDefault(x => x.CustomerId == customerId);
+            var feedBack = _feedbacks.FirstOrDefault(x => x.Id == id);
 
 
-            feedBack?.Update(customerId, feedbackDate, feedbackText);
+            feedBack?.Update(id,customerId, feedbackDate, feedbackText);
         }
 
         public void RemoveFeedback(Feedback feedBack)
@@ -71,12 +82,12 @@ namespace CustomerExperience.Domain.CustomerAggregate
 
             _serviceRequests.Add(serviceRequest);
         }
-        public void UpdateServiceRequest(int customerId, DateTime requestDate, string requestDescription)
+        public void UpdateServiceRequest(int id, int customerId, DateTime requestDate, string requestDescription)
         {
-            var serviceRequest = _serviceRequests.FirstOrDefault(x => x.CustomerId == customerId);
+            var serviceRequest = _serviceRequests.FirstOrDefault(x => x.Id == id);
 
 
-            serviceRequest?.Update(customerId, requestDate, requestDescription);
+            serviceRequest?.Update(id,customerId, requestDate, requestDescription);
         }
 
         public void RemoveServiceRequest(ServiceRequest serviceRequest)

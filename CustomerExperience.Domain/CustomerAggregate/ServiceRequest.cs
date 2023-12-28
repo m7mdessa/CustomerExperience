@@ -7,8 +7,9 @@ namespace CustomerExperience.Domain.CustomerAggregate
 
 
         #region Internal Methods
-        internal void Update(int customerId, DateTime requestDate, string requestDescription)
+        internal void Update(int id,int customerId, DateTime requestDate, string requestDescription)
         {
+            Id = id;
             CustomerId = customerId;
             RequestDate = requestDate;
             RequestDescription = requestDescription;

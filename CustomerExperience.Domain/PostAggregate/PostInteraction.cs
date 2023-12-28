@@ -1,10 +1,9 @@
-﻿
-using CustomerExperience.Packages;
+﻿using CustomerExperience.Packages;
 
 
 namespace CustomerExperience.Domain.PostAggregate
 {
-    public class PostInteraction: AuditableEntity
+    public class PostInteraction : AuditableEntity
     {
 
         #region Members
@@ -29,7 +28,7 @@ namespace CustomerExperience.Domain.PostAggregate
         #endregion
 
         #region Internal Methods
-        internal void UpdatePostInteraction(int id,int customerId, InteractionType type, int postId)
+        internal void UpdatePostInteraction(int id, int customerId, InteractionType type, int postId)
         {
             Id = id;
             CustomerId = customerId;
