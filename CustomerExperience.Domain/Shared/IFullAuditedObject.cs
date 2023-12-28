@@ -2,7 +2,13 @@
 {
     public interface IFullAuditedObject
     {
-        public bool IsDeleted { get;}
+         DateTime CreatedDate { get; }
 
+         string CreatedBy { get; } 
+
+
+         DateTime ModifiedDate { get; }
+
+         string? ModifiedBy { get; }
     }
 }

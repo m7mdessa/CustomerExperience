@@ -4,7 +4,7 @@ using CustomerExperience.Domain.Shared;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
-    public class Customer : BaseEntity,IAggregateRoot
+    public class Customer : AggregateRootEntity
     {
 
       

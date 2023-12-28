@@ -2,7 +2,7 @@
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
-    public class Feedback :BaseEntity
+    public class Feedback : AuditableEntity
     {
 
 

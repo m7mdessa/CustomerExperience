@@ -2,7 +2,7 @@
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {
-    public class ServiceRequest:BaseEntity
+    public class ServiceRequest:AuditableEntity
     {
 
 
