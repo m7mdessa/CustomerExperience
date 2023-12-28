@@ -8,7 +8,7 @@ namespace CustomerExperience.Domain.PostAggregate
 
         #region Members
         public InteractionType Type { get; private set; }
-        public DateTime Timestamp { get; private set; } = DateTime.Now;
+        public DateTime Timestamp { get; private set; } 
         public int CustomerId { get; private set; }
         public int PostId { get; private set; }
         public Post? Post { get; private set; }
@@ -23,6 +23,7 @@ namespace CustomerExperience.Domain.PostAggregate
             CustomerId = customerId;
             Type = type;
             PostId = postId;
+            Timestamp = DateTime.UtcNow;
         }
 
         #endregion
