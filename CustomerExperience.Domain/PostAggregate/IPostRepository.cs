@@ -1,5 +1,4 @@
-﻿using CustomerExperience.Domain.CategoryAggregate;
-using CustomerExperience.Domain.Shared;
+﻿using CustomerExperience.Domain.Shared;
 
 namespace CustomerExperience.Domain.PostAggregate
 {

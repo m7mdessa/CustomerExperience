@@ -2,7 +2,7 @@
 using CustomerExperience.Packages;
 
 
-namespace CustomerExperience.Domain.CategoryAggregate
+namespace CustomerExperience.Domain.PostAggregate
 {
     public class PostInteraction: AuditableEntity
     {

@@ -5,8 +5,6 @@ namespace CustomerExperience.Domain.CustomerAggregate
 {
     public class Customer : AggregateRootEntity
     {
-
-      
         private readonly List<Feedback> _feedbacks = new();
         private readonly List<ServiceRequest> _serviceRequests = new();
 
@@ -30,7 +28,6 @@ namespace CustomerExperience.Domain.CustomerAggregate
 
 
         #endregion
-
 
         #region Members
         public string? FirstName { get; private set; }
