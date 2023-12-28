@@ -2,11 +2,8 @@
 
 namespace CustomerExperience.Domain.PostAggregate
 {
-<<<<<<< HEAD
-    public class Post : AuditableEntity
-=======
+
     public class Post: AggregateRootEntity
->>>>>>> 4b383a5a9abc0ca5c896efd4b7275108c1141a1e
     {
         #region Members
         public string Title { get; private set; }
@@ -38,11 +35,8 @@ namespace CustomerExperience.Domain.PostAggregate
             Content = content;
         }
 
-<<<<<<< HEAD
         internal void RemovePost(int id)
-=======
-        public void DeletePost(int id)
->>>>>>> 4b383a5a9abc0ca5c896efd4b7275108c1141a1e
+
         {
             var deletePost = _postInteractions?.SingleOrDefault(s => s.Id == id);
             _postInteractions?.Remove(deletePost);
