@@ -1,10 +1,4 @@
-﻿using CustomerExperience.Domain.PostAggregate;
-using CustomerExperience.Packages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CustomerExperience.Packages;
 
 namespace CustomerExperience.Domain.RoleAggregate
 {
