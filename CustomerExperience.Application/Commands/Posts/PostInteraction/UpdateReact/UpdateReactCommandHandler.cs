@@ -1,12 +1,7 @@
-﻿using CustomerExperience.Application.Commands.Posts.PostInteraction.React;
-using CustomerExperience.Domain.PostAggregate;
+﻿using CustomerExperience.Domain.PostAggregate;
 using CustomerExperience.Packages;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateReact
 {
