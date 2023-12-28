@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CustomerExperience.Application.Commands.Posts.CreatePost
 {
-    public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, int>
+    internal sealed class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, int>
     {
         private readonly IPostRepository _postRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -16,13 +16,13 @@ namespace CustomerExperience.Application.Commands.Posts.CreatePost
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(CreatePostCommand definitionCommand,CancellationToken cancellationToken)
+        public async Task<int> Handle(CreatePostCommand command,CancellationToken cancellationToken)
         {
             var post = new Post(
-                definitionCommand.Title,
-                definitionCommand.Content
-
+                command.Title,
+                command.Content
             );
+
             await _postRepository.AddAsync(post);
             await _unitOfWork.SaveChangesAsync();
             return post.Id;

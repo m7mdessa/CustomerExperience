@@ -1,5 +1,4 @@
-﻿using CustomerExperience.Domain.Shared;
-using CustomerExperience.Packages;
+﻿using CustomerExperience.Packages;
 
 namespace CustomerExperience.Domain.CustomerAggregate
 {

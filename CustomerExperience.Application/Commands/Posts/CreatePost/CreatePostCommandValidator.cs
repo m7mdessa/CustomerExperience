@@ -6,7 +6,7 @@ namespace CustomerExperience.Application.Commands.Posts.CreatePost
 {
     public class CreatePostCommandValidator : AbstractValidator<CreatePostCommand>
     {
-        public CreatePostCommandValidator(IPostRepository postRepository)
+        public CreatePostCommandValidator()
         {
             RuleFor(x => x.Title)
                 .NotNull()
