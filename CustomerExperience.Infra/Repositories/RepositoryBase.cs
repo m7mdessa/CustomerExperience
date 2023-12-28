@@ -2,11 +2,12 @@
 using CustomerExperience.Infra;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using CustomerExperience.Packages;
 
 
 namespace Infrastructure.Repositories
 {
-    public class RepositoryBase<T> : IGenericRepository<T> where T :BaseEntity
+    public class RepositoryBase<T> : IGenericRepository<T> where T : BaseEntity
     {
 
         protected readonly AppDbContext _context;

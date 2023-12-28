@@ -1,9 +1,10 @@
-﻿using CustomerExperience.Domain.Shared;
+﻿
+using CustomerExperience.Packages;
 
 
 namespace CustomerExperience.Domain.CategoryAggregate
 {
-    public class PostInteraction: BaseEntity
+    public class PostInteraction: AuditableEntity
     {
 
         #region Members

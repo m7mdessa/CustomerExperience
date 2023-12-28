@@ -1,9 +1,9 @@
-﻿using CustomerExperience.Domain.Shared;
+﻿using CustomerExperience.Packages;
 
 
 namespace CustomerExperience.Domain.CategoryAggregate
 {
-    public class Category : BaseEntity, IAggregateRoot
+    public class Category : AggregateRootEntity
     {
         #region Members
         public string Name { get; private set; }

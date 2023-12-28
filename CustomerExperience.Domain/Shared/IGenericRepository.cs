@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using CustomerExperience.Packages;
+using System.Linq.Expressions;
 
 namespace CustomerExperience.Domain.Shared
 {

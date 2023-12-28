@@ -1,8 +1,9 @@
-﻿using CustomerExperience.Domain.Shared;
+﻿
+using CustomerExperience.Packages;
 
 namespace CustomerExperience.Domain.CategoryAggregate
 {
-    public class Post:BaseEntity
+    public class Post: AuditableEntity
     {
         #region Members
         public string Title { get; private set; }

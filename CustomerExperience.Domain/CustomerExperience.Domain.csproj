@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CustomerExperience.BaseDomain" Version="1.0.0" />
+    <PackageReference Include="CustomerExperience.Dmain.Base" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
