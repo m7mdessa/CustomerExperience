@@ -1,5 +1,4 @@
-﻿using CustomerExperience.Application.Commands.Customers.Feedbacks.AddFeedback;
-using CustomerExperience.Domain.CustomerAggregate;
+﻿using CustomerExperience.Domain.CustomerAggregate;
 using CustomerExperience.Packages;
 using MediatR;
 

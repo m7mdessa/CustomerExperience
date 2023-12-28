@@ -1,7 +1,6 @@
-﻿using CustomerExperience.Infra;
-using CustomerExperience.Packages;
+﻿using CustomerExperience.Packages;
 
-namespace Infrastructure
+namespace CustomerExperience.Infra
 {
     public class UnitOfWork : IUnitOfWork
     {
