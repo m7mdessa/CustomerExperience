@@ -26,14 +26,14 @@ namespace CustomerExperience.Domain.PostAggregate
         #region Internal Methods
 
         #region Post Methods
-        internal void UpdatePost(int id, string? title, string? content)
+        public void UpdatePost(int id, string? title, string? content)
         {
             Id = id;
             Title = title;
             Content = content;
         }
-        
-        internal void DeletePost(int id)
+
+        public void DeletePost(int id)
         {
             var deletePost = _postInteractions?.SingleOrDefault(s => s.Id == id);
             _postInteractions?.Remove(deletePost);
