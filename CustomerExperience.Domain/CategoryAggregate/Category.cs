@@ -59,6 +59,13 @@ namespace CustomerExperience.Domain.CategoryAggregate
                 _posts?.Remove(getPostById);
             }
         }
+
+        public void Interact(int postId, PostInteraction postInteraction)
+        {
+            var postById = _posts?.FirstOrDefault(s => s.Id == postId);
+            _posts?.Interact(postInteraction);
+        }
+
         #endregion
     }
 }
