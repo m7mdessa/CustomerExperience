@@ -21,9 +21,9 @@ namespace CustomerExperience.Domain.RoleAggregate
         #endregion
 
         #region Public Methods
-        public void AddUser (string username, string password, int roleId)
+        public void AddUser (string username, string password, int roleId , int customerId)
         {
-            var user = new User (username, password,roleId);
+            var user = new User (username, password,roleId , customerId);
             _users.Add(user);
         }
 
@@ -33,12 +33,12 @@ namespace CustomerExperience.Domain.RoleAggregate
             _users?.Remove(user);
         }
 
-        public void UpdateUserInfo(string username, string password, int roleId, int id)
+        public void UpdateUserInfo(string username, string password, int roleId, int id, int customerId)
         {
             var user = _users?.SingleOrDefault(s => s.Id == id);
             if (user != null)
             {
-                user.UpdateUserInfo(username, password, roleId, id);
+                user.UpdateUserInfo(username, password, roleId, id, customerId);
             }
         }
         #endregion
