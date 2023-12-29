@@ -6,6 +6,8 @@ using CustomerExperience.Application.Commands.Posts.PostInteraction.React;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateReact;
 using CustomerExperience.Domain.PostAggregate;
 using static CustomerExperience.Application.Queries.Posts.GelPostsList;
+using CustomerExperience.Application.Queries.Posts;
+using static CustomerExperience.Application.Queries.Posts.GetPostDetails;
 
 
 namespace PostExperience.Presentation.API.Controllers.Posts
@@ -107,6 +109,14 @@ namespace PostExperience.Presentation.API.Controllers.Posts
             var posts = await _mediator.Send(new GetAllPostsQuery());
             return Ok(posts);
         }
+
+        [HttpGet("GetPostById/{postId}")]
+        public async Task<ActionResult<List<Post>>> GetPostById(int postId)
+        {
+            var post = await _mediator.Send(new GetPostDetailsQuery { PostId = postId });
+            return Ok(post);
+        }
+
         #endregion
     }
 }
