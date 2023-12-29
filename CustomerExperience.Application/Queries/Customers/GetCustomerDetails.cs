@@ -1,5 +1,4 @@
-﻿
-using CustomerExperience.Domain.CustomerAggregate;
+﻿using CustomerExperience.Domain.CustomerAggregate;
 using Mapster;
 using MediatR;
 

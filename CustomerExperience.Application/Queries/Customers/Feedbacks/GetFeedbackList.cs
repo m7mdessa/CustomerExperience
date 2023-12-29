@@ -35,9 +35,9 @@ namespace CustomerExperience.Application.Queries.Customers.Feedbacks
 
                 var customer = await _customerRepository.GetByIdAsync(request.customerId,fb=> fb.Feedbacks);
 
-                var feedbacks = customer.Feedbacks;
+                var feedBacks = customer.Feedbacks;
 
-                var data = feedbacks?.Adapt<List<GetFeedbackListDto>>();
+                var data = feedBacks?.Adapt<List<GetFeedbackListDto>>();
 
 
                 return data;

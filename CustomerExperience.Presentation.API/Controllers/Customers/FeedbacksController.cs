@@ -13,7 +13,7 @@ namespace CustomerExperience.Presentation.API.Controllers.Customers
     {
         #region Queries
 
-        [HttpGet("{customerId}/Feedbacks")]
+        [HttpGet("{customerId}/feedBacks")]
         public async Task<ActionResult<List<GetFeedbackListDto>>> GetFeedbacks(int customerId)
         {
             var query = new GetFeedbackListQuery(customerId);
@@ -23,7 +23,7 @@ namespace CustomerExperience.Presentation.API.Controllers.Customers
         }
 
 
-        [HttpGet("{customerId}/Feedback/{id}")]
+        [HttpGet("{customerId}/feedBack/{id}")]
         public async Task<ActionResult<GetFeedbackDetailsDto>> GetFeedback(int id,int customerId)
         {
             var query = new GetFeedbackDetailsQuery(id, customerId);
@@ -40,7 +40,7 @@ namespace CustomerExperience.Presentation.API.Controllers.Customers
         #region Commands
 
 
-        [HttpPost("{customerId}/feedBacks")]
+        [HttpPost("{customerId}/feedBack")]
         public async Task<ActionResult> CreateFeedback(int customerId,
             [FromBody] AddFeedbackCommand command)
         {
@@ -48,7 +48,7 @@ namespace CustomerExperience.Presentation.API.Controllers.Customers
             return Ok(await _mediator.Send(command));
         }
 
-        [HttpPut("{customerId}/feedBacks/{id}")]
+        [HttpPut("{customerId}/feedBack/{id}")]
         public async Task<ActionResult> UpdateFeedback(int customerId, int id,
         [FromBody] UpdateFeedbackCommand command)
         {
@@ -58,7 +58,7 @@ namespace CustomerExperience.Presentation.API.Controllers.Customers
             return Ok(await _mediator.Send(command));
         }
 
-        [HttpDelete("{customerId}/feedBacks/{id}")]
+        [HttpDelete("{customerId}/feedBack/{id}")]
         public async Task<ActionResult> DeleteFeedback(int customerId, int id,
             [FromBody] DeleteFeedbackCommand command)
         {

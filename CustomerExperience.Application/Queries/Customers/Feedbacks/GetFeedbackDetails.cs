@@ -32,10 +32,10 @@ namespace CustomerExperience.Application.Queries.Customers.Feedbacks
 
                 var customer = await _customerRepository.GetByIdAsync(request.customerId, fb => fb.Feedbacks);
 
-                var feedback = customer.Feedbacks.FirstOrDefault(s => s.Id == request.id);
+                var feedBack = customer.Feedbacks.FirstOrDefault(s => s.Id == request.id);
 
 
-                var data = feedback?.Adapt<GetFeedbackDetailsDto>();
+                var data = feedBack?.Adapt<GetFeedbackDetailsDto>();
 
 
                 return data;
