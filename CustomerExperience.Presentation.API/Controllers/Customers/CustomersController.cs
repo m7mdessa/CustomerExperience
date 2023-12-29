@@ -1,7 +1,11 @@
-﻿using CustomerExperience.Application.Commands.Customers.CreateCustomer;
+﻿using Application.Queries.Users;
+using CustomerExperience.Application.Commands.Customers.CreateCustomer;
 using CustomerExperience.Application.Commands.Customers.UpdateCustomer;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Application.Queries.Users.GetCustomerDetails;
+using static Application.Queries.Users.GetCustomerList;
 
 namespace CustomerExperience.Presentation.API.Controllers.Customers
 {
@@ -18,6 +22,33 @@ namespace CustomerExperience.Presentation.API.Controllers.Customers
             _mediator = mediator;
 
         }
+
+        #region Queries
+
+        [HttpGet("Customers")]
+        public async Task<ActionResult<List<GetCustomerListDto>>> GetCustomer()
+        {
+            var query = new GetCustomerListQuery();
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("{id}/Customer")]
+        public async Task<ActionResult<GetCustomerDetailsDto>> GetCustomer(int id)
+        {
+            var query = new GetCustomerDetailsQuery(id);
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+
+
+        #endregion
+
+
 
         #region Commands
 
