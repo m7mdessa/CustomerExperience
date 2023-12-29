@@ -4,8 +4,10 @@ namespace CustomerExperience.Core.Domain.RoleAggregate
 {
     public interface IRoleRepository 
     {
-        Task UpdateRoleAsync(Role updaterole);
-        Task<Role> CreateRoleAsync(Role createRole);
-        Task<Role> GetRole(int id);
-    }  
+        Task UpdateAsync(Role role);
+        Task<Role> AddAsync(Role role);
+        Task<Role> GetByIdAsync(int id);
+        string Login(string username, string password);
+
+    }
 }
