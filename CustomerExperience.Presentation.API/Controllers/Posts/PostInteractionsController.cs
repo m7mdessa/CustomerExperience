@@ -1,12 +1,10 @@
 ﻿using CustomerExperience.Application.Commands.Posts.PostInteraction.React;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateReact;
 using Microsoft.AspNetCore.Mvc;
-using MediatR;
+
 
 namespace CustomerExperience.Presentation.API.Controllers.Posts
 {
-   
-
     public partial class PostsController
     {
         #region Commands
@@ -31,9 +29,7 @@ namespace CustomerExperience.Presentation.API.Controllers.Posts
             return Ok(await _mediator.Send(command));
         }
 
-       
+
         #endregion
-
-
     }
 }
