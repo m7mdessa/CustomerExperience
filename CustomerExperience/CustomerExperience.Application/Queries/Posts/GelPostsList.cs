@@ -11,7 +11,7 @@ namespace CustomerExperience.Application.Queries.Posts
 {
     public static class GelPostsList
     {
-        #region Dto
+        #region Dtos
         public class GetAllPostsDto
         {
             public int Id { get; set; }
