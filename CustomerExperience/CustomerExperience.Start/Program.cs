@@ -6,6 +6,7 @@ using CustomerExperience.Infra;
 using CustomerExperience.Infra.Repositories;
 using CustomerExperience.Packages;
 using Mapster;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -39,6 +40,22 @@ builder.Services.AddSingleton(config);
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
+
+
+builder.Services.AddMassTransit(x =>
+{
+    var kafkaBrokerServer = "localhost:9092";
+    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
+
+    x.AddConsumers(DynamicWorkflowConsumers.Assemblies);
+    x.AddConsumers(NotificationsSettingsConsumers.Assemblies);
+
+    x.AddRider(rider => { rider.UsingKafka((context, k) => { k.Host(kafkaBrokerServer); }); });
+});
+
+builder.Services.AddMassTransitHostedService();
+
+
 
 
 builder.Services.AddAuthentication(opt => {
