@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CustomerExperience.Domain\CustomerExperience.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\Posts\GetPostById\" />
-  </ItemGroup>
-
 </Project>

@@ -5,6 +5,7 @@ using CustomerExperience.Application.Commands.Posts.CreatePost;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.React;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateReact;
 using CustomerExperience.Domain.PostAggregate;
+using static CustomerExperience.Application.Queries.Posts.GelPostsList;
 
 
 namespace PostExperience.Presentation.API.Controllers.Posts
@@ -37,7 +38,13 @@ namespace PostExperience.Presentation.API.Controllers.Posts
         }
 
 
+        //[HttpPost("{postId}/postInteractions")]
+        //public async Task<ActionResult> React(int postId, [FromBody] ReactCommand command)
+        //{
+        //    command.PostId = postId;
+        //    return Ok(await _mediator.Send(command));
 
+        //}
 
         [HttpPut("{postId}/postInteractions/{id}")]
         public async Task<ActionResult> UpdateReact(int postId, int id, [FromBody] UpdateReactCommand command)
@@ -91,6 +98,15 @@ namespace PostExperience.Presentation.API.Controllers.Posts
             return Ok(await _mediator.Send(command));
         }
 
+        #endregion
+
+        #region Queries
+        [HttpGet("GetAllPosts")]
+        public async Task<ActionResult<List<GetAllPostsDto>>> GetAllPosts()
+        {
+            var posts = await _mediator.Send(new GetAllPostsQuery());
+            return Ok(posts);
+        }
         #endregion
     }
 }
