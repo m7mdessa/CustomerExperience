@@ -37,13 +37,7 @@ namespace PostExperience.Presentation.API.Controllers.Posts
         }
 
 
-        //[HttpPost("{postId}/postInteractions")]
-        //public async Task<ActionResult> React(int postId, [FromBody] ReactCommand command)
-        //{
-        //    command.PostId = postId;
-        //    return Ok(await _mediator.Send(command));
 
-        //}
 
         [HttpPut("{postId}/postInteractions/{id}")]
         public async Task<ActionResult> UpdateReact(int postId, int id, [FromBody] UpdateReactCommand command)
