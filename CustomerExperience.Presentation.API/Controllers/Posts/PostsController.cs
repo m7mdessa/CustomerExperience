@@ -5,7 +5,7 @@ using CustomerExperience.Application.Commands.Posts.CreatePost;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.React;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateReact;
 using CustomerExperience.Domain.PostAggregate;
-using CustomerExperience.Application.Queries.Posts.GetAllPosts;
+using static CustomerExperience.Application.Queries.Posts.GelPostsList;
 
 
 namespace PostExperience.Presentation.API.Controllers.Posts
