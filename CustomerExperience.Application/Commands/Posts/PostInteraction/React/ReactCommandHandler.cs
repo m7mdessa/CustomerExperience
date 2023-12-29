@@ -18,7 +18,7 @@ namespace CustomerExperience.Application.Commands.Posts.PostInteraction.React
 
         public async Task<int> Handle(ReactCommand command, CancellationToken cancellationToken)
         {
-            var post = await _postRepository.GetAsync(command.PostId);
+            var post = await _postRepository.GetByIdAsync(command.PostId, r => r.PostInteractions);
             post.Interact(command.CustomerId, command.InteractionType, command.PostId);
 
             await _postRepository.UpdateAsync(post);

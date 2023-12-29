@@ -14,5 +14,6 @@ namespace CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateRe
         public int PostId { get; set; }
         public int CustomerId { get; set; }
         public InteractionType InteractionType { get; set; }
+        public bool IsLike { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CustomerExperience.Application.Commands.Posts.UpdatePost;
 using CustomerExperience.Application.Commands.Posts.CreatePost;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.React;
 using CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateReact;
+using CustomerExperience.Domain.PostAggregate;
 
 
 namespace PostExperience.Presentation.API.Controllers.Posts
@@ -36,20 +37,63 @@ namespace PostExperience.Presentation.API.Controllers.Posts
         }
 
 
-        [HttpPost("{postId}/postInteractions")]
-        public async Task<ActionResult> React(int postId, [FromBody] ReactCommand command)
-        {
-            command.PostId = postId;
+        //[HttpPost("{postId}/postInteractions")]
+        //public async Task<ActionResult> React(int postId, [FromBody] ReactCommand command)
+        //{
+        //    command.PostId = postId;
+        //    return Ok(await _mediator.Send(command));
 
-            return Ok(await _mediator.Send(command));
-
-        }
+        //}
 
         [HttpPut("{postId}/postInteractions/{id}")]
         public async Task<ActionResult> UpdateReact(int postId, int id, [FromBody] UpdateReactCommand command)
         {
             command.PostId = postId;
             command.Id = id;
+            command.InteractionType = command.IsLike ? InteractionType.Like : InteractionType.Dislike;
+            switch (command.InteractionType)
+            {
+                case InteractionType.Like:
+                    command.IsLike = true;
+                    command.InteractionType = InteractionType.Like;
+                    break;
+
+                case InteractionType.Dislike:
+                    command.IsLike = false;
+                    command.InteractionType = InteractionType.Dislike;
+                    break;
+
+                default:
+                    // Handle other cases if necessary
+                    break;
+            }
+            return Ok(await _mediator.Send(command));
+        }
+
+        
+
+        [HttpPost("{postId}/postInteractions")]
+        public async Task<ActionResult> React(int postId, [FromBody] ReactCommand command)
+        {
+            command.PostId = postId;
+            command.InteractionType = command.IsLike ? InteractionType.Like : InteractionType.Dislike;
+            switch (command.InteractionType)
+            {
+                case InteractionType.Like:
+                    command.IsLike = true;
+                    command.InteractionType = InteractionType.Like;
+                    break;
+
+                case InteractionType.Dislike:
+                    command.IsLike = false;
+                    command.InteractionType = InteractionType.Dislike;
+                    break;
+
+                default:
+                    // Handle other cases if necessary
+                    break;
+            }
+
             return Ok(await _mediator.Send(command));
         }
 

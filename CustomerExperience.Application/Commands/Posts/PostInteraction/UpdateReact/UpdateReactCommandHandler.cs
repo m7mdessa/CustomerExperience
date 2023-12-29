@@ -18,7 +18,7 @@ namespace CustomerExperience.Application.Commands.Posts.PostInteraction.UpdateRe
 
         public async Task<Unit> Handle(UpdateReactCommand command, CancellationToken cancellationToken)
         {
-            var post = await _postRepository.GetAsync(command.PostId);
+            var post = await _postRepository.GetByIdAsync(command.PostId, r=>r.PostInteractions);
 
             post?.UpdateInteract(command.Id, command.CustomerId, command.InteractionType, command.PostId);
 
