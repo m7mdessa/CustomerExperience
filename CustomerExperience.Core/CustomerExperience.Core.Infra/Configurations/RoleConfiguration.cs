@@ -1,8 +1,8 @@
-﻿using CustomerExperience.Domain.RoleAggregate;
+﻿using CustomerExperience.Core.Domain.RoleAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace  CustomerExperience.Infra.Configurations
+namespace  CustomerExperience.Core.Infra.Configurations
 {
     public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {

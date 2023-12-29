@@ -1,6 +1,7 @@
-﻿using CustomerExperience.Packages;
+﻿
+using CustomerExperience.Packages;
 
-namespace CustomerExperience.Domain.RoleAggregate
+namespace CustomerExperience.Core.Domain.RoleAggregate
 {
     public class Role: AggregateRootEntity
     {

@@ -1,6 +1,6 @@
 ﻿using CustomerExperience.Packages;
 
-namespace CustomerExperience.Domain.RoleAggregate
+namespace CustomerExperience.Core.Domain.RoleAggregate
 {
     public class User: AuditableEntity
     {

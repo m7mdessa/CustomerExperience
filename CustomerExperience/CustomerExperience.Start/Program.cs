@@ -1,7 +1,6 @@
 using CustomerExperience.Applicationn;
 using CustomerExperience.Domain.CustomerAggregate;
 using CustomerExperience.Domain.PostAggregate;
-using CustomerExperience.Domain.RoleAggregate;
 using CustomerExperience.Domain.Shared;
 using CustomerExperience.Infra;
 using CustomerExperience.Infra.Repositories;
@@ -27,7 +26,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+//builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
