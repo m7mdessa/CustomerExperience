@@ -9,6 +9,29 @@ using System.Threading.Tasks;
 
 namespace CustomerExperience.Application.Queries.Posts.GetAllPosts
 {
+    #region Dto
+    public class GetAllPostsDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public DateTime PublishDate { get; set; }
+        public List<InteractionDto> Interactions { get; set; }
+    }
+
+    public class InteractionDto
+    {
+        public InteractionType Type { get; set; }
+        public DateTime Timestamp { get; set; }
+        public int CustomerId { get; set; }
+    }
+    #endregion
+
+    #region Query
+    public record GetAllPostsQuery : IRequest<List<GetAllPostsDto>>;
+    #endregion
+
+    #region Handler
     internal sealed class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, List<GetAllPostsDto>>
     {
         private readonly IPostRepository _postRepository;
@@ -18,17 +41,24 @@ namespace CustomerExperience.Application.Queries.Posts.GetAllPosts
             _postRepository = postRepository;
 
             TypeAdapterConfig<Post, GetAllPostsDto>.NewConfig()
-                .Map(dest => dest.Id, src => src.Id)
-                .Map(dest => dest.Title, src => src.Title)
-                .Map(dest => dest.Content, src => src.Content)
-                .Map(dest => dest.PublishDate, src => src.PublishDate)
-                .Map(dest => dest.Type, src => src.PostInteractions);
+            .Map(dest => dest.Id, src => src.Id)
+            .Map(dest => dest.Title, src => src.Title)
+            .Map(dest => dest.Content, src => src.Content)
+            .Map(dest => dest.PublishDate, src => src.PublishDate);
         }
 
         public async Task<List<GetAllPostsDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var posts = await _postRepository.GetAllAsync();
-            return posts.Select(post => post.Adapt<GetAllPostsDto>()).ToList();
+            var postsWithInteractions = await _postRepository.GetAllPostsAsync(); 
+            TypeAdapterConfig<Post, GetAllPostsDto>
+            .ForType()
+            .Map(dest => dest.Interactions, src => src.PostInteractions);
+
+            var dtos = postsWithInteractions.Adapt<List<GetAllPostsDto>>();
+
+            return dtos;
         }
     }
+
+    #endregion
 }
