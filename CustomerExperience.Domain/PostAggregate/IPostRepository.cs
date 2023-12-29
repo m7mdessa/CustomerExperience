@@ -4,6 +4,6 @@ namespace CustomerExperience.Domain.PostAggregate
 {
     public interface IPostRepository : IGenericRepository<Post>
     {
-        Task<List<Post>> GetAllPostsAsync();
+       
     }
 }

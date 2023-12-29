@@ -51,7 +51,7 @@ namespace CustomerExperience.Application.Queries.Posts
 
             public async Task<List<GetAllPostsDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
             {
-                var postsWithInteractions = await _postRepository.GetAllPostsAsync();
+                var postsWithInteractions = await _postRepository.GetAllAsync(pi=>pi.PostInteractions);
                 TypeAdapterConfig<Post, GetAllPostsDto>
                 .ForType()
                 .Map(dest => dest.Interactions, src => src.PostInteractions);
