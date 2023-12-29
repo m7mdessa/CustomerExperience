@@ -5,6 +5,7 @@ using CustomerExperience.Domain.RoleAggregate;
 using CustomerExperience.Domain.Shared;
 using CustomerExperience.Infra;
 using CustomerExperience.Infra.Repositories;
+using CustomerExperience.Packages;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(RepositoryBase<>
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 builder.Services.AddMapster();
