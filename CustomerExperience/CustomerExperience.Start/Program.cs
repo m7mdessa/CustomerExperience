@@ -4,6 +4,7 @@ using CustomerExperience.Domain.PostAggregate;
 using CustomerExperience.Domain.Shared;
 using CustomerExperience.Infra;
 using CustomerExperience.Infra.Repositories;
+using CustomerExperience.Infra.Services;
 using CustomerExperience.Packages;
 using Mapster;
 using MassTransit;
@@ -29,6 +30,8 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddHostedService<ConsumerService>();
+
 
 builder.Services.AddMapster();
 
@@ -41,20 +44,29 @@ builder.Services.AddSingleton(config);
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
 
+//builder.Services.AddMassTransitHostedService();
 
 //builder.Services.AddMassTransit(x =>
 //{
 //    var kafkaBrokerServer = "localhost:9092";
 //    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
 
-//    x.AddConsumers(DynamicWorkflowConsumers.Assemblies);
-//    x.AddConsumers(NotificationsSettingsConsumers.Assemblies);
+//    x.AddConsumer<UserAddedConsumer>();
 
-//    x.AddRider(rider => { rider.UsingKafka((context, k) => { k.Host(kafkaBrokerServer); }); });
+
+//    x.AddRider(rider =>
+//    {
+//        rider.UsingKafka((context, k) =>
+//        {
+
+//            k.Host(kafkaBrokerServer);
+
+
+//        });
+//    });
+
+
 //});
-
-//builder.Services.AddMassTransitHostedService();
-
 
 
 

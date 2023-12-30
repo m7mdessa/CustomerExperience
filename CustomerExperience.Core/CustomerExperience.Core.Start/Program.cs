@@ -1,10 +1,10 @@
-using Application.Commands.Users.AddUser;
 using CustomerExperience.Core.Application;
 using CustomerExperience.Core.Application.Commands.CreateUser;
 using CustomerExperience.Core.Application.DTO;
 using CustomerExperience.Core.Domain.RoleAggregate;
 using CustomerExperience.Core.Infra;
 using CustomerExperience.Core.Infra.Repositories;
+using CustomerExperience.Core.Infra.Services;
 using Mapster;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -28,7 +28,10 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-builder.Services.AddScoped<UserAddedConsumer>();
+//builder.Services.AddSingleton<UserAddedConsumer>();
+
+builder.Services.AddSingleton<ProducerService>();
+
 builder.Services.AddMapster();
 
 var config = TypeAdapterConfig.GlobalSettings;
@@ -75,23 +78,41 @@ builder.Services.AddLogging(configure =>
         .CreateLogger());
 });
 
-builder.Services.AddMassTransit(x =>
-{
-    var kafkaBrokerServer = "localhost:9092";
-    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
 
-    x.AddConsumer<UserAddedConsumer>();
- 
 
-    x.AddRider(rider => { rider.UsingKafka((context, k) => {
-        
-        k.Host(kafkaBrokerServer);
 
-      
-    }); });
-});
+//builder.Services.AddMassTransit(x =>
+//{
+//    var kafkaBrokerServer = "localhost:9092";
+//    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
 
-builder.Services.AddMassTransitHostedService();
+//    x.AddConsumer<UserAddedConsumer>();
+
+
+//    x.AddRider(rider =>
+//    {
+//        rider.UsingKafka((context, k) =>
+//        {
+
+//            k.Host(kafkaBrokerServer);
+
+
+//        });
+//    });
+
+
+//});
+
+
+//builder.Services.AddMassTransitHostedService();
+
+
+
+
+
+
+
+
 
 var app = builder.Build();
 
