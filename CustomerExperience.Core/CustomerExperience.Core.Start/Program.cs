@@ -1,12 +1,16 @@
+using Application.Commands.Users.AddUser;
 using CustomerExperience.Core.Application;
+using CustomerExperience.Core.Application.Commands.CreateUser;
 using CustomerExperience.Core.Application.DTO;
 using CustomerExperience.Core.Domain.RoleAggregate;
 using CustomerExperience.Core.Infra;
 using CustomerExperience.Core.Infra.Repositories;
 using Mapster;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Reflection;
 using System.Text;
 
@@ -24,7 +28,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-
+builder.Services.AddScoped<UserAddedConsumer>();
 builder.Services.AddMapster();
 
 var config = TypeAdapterConfig.GlobalSettings;
@@ -61,7 +65,37 @@ builder.Services.AddCors(corsOptions =>
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
+
+
+builder.Services.AddLogging(configure =>
+{
+    configure.AddSerilog(new LoggerConfiguration()
+        .MinimumLevel.Debug()
+        .WriteTo.Console()
+        .CreateLogger());
+});
+
+builder.Services.AddMassTransit(x =>
+{
+    var kafkaBrokerServer = "localhost:9092";
+    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
+
+    x.AddConsumer<UserAddedConsumer>();
+ 
+
+    x.AddRider(rider => { rider.UsingKafka((context, k) => {
+        
+        k.Host(kafkaBrokerServer);
+
+      
+    }); });
+});
+
+builder.Services.AddMassTransitHostedService();
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

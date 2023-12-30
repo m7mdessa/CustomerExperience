@@ -42,18 +42,18 @@ builder.Services.AddSingleton(config);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
 
 
-builder.Services.AddMassTransit(x =>
-{
-    var kafkaBrokerServer = "localhost:9092";
-    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
+//builder.Services.AddMassTransit(x =>
+//{
+//    var kafkaBrokerServer = "localhost:9092";
+//    x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
 
-    x.AddConsumers(DynamicWorkflowConsumers.Assemblies);
-    x.AddConsumers(NotificationsSettingsConsumers.Assemblies);
+//    x.AddConsumers(DynamicWorkflowConsumers.Assemblies);
+//    x.AddConsumers(NotificationsSettingsConsumers.Assemblies);
 
-    x.AddRider(rider => { rider.UsingKafka((context, k) => { k.Host(kafkaBrokerServer); }); });
-});
+//    x.AddRider(rider => { rider.UsingKafka((context, k) => { k.Host(kafkaBrokerServer); }); });
+//});
 
-builder.Services.AddMassTransitHostedService();
+//builder.Services.AddMassTransitHostedService();
 
 
 
