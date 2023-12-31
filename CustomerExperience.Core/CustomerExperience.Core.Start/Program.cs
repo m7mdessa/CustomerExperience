@@ -1,10 +1,11 @@
+using Application.Commands.Users.CreateUser;
 using CustomerExperience.Core.Application;
 using CustomerExperience.Core.Application.Commands.CreateUser;
 using CustomerExperience.Core.Application.DTO;
 using CustomerExperience.Core.Domain.RoleAggregate;
 using CustomerExperience.Core.Infra;
 using CustomerExperience.Core.Infra.Repositories;
-using CustomerExperience.Core.Infra.Services;
+//using CustomerExperience.Core.Infra.Services;
 using Mapster;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,7 +31,7 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 //builder.Services.AddSingleton<UserAddedConsumer>();
 
-builder.Services.AddSingleton<ProducerService>();
+//builder.Services.AddSingleton<ProducerService>();
 
 builder.Services.AddMapster();
 
@@ -79,6 +80,32 @@ builder.Services.AddLogging(configure =>
 });
 
 
+builder.Host
+    .UseMassTransit((hostContext, x) =>
+    {
+
+        var kafkaBrokerServer = builder.Configuration["MessageBroker:Host"];
+        x.UsingInMemory((context, cfg) => { cfg.ConfigureEndpoints(context); });
+
+        x.AddRider(r =>
+        {
+            x.AddConsumer<UserAddedConsumer>();
+          
+
+            var topicName = "UserCreated";
+
+            r.AddProducer<string, CreateUserCommand>(topicName, (context, cfg) =>
+            {
+            });
+
+          
+            r.UsingKafka((context, cfg) =>
+            {
+                cfg.Host(kafkaBrokerServer);
+            });
+
+        });
+    });
 
 
 //builder.Services.AddMassTransit(x =>
