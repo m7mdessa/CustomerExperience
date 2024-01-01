@@ -26,7 +26,7 @@ namespace PostExperience.Presentation.API.Controllers.Posts
 
         #region Commands
 
-        [HttpPost("CreatePost")]
+        [HttpPost("createPost")]
         public async Task<ActionResult> CreatePost([FromBody] CreatePostCommand command)
         {
             return Ok(await _mediator.Send(command));
@@ -39,14 +39,6 @@ namespace PostExperience.Presentation.API.Controllers.Posts
             return Ok(await _mediator.Send(command));
         }
 
-
-        //[HttpPost("{postId}/postInteractions")]
-        //public async Task<ActionResult> React(int postId, [FromBody] ReactCommand command)
-        //{
-        //    command.PostId = postId;
-        //    return Ok(await _mediator.Send(command));
-
-        //}
 
         [HttpPut("{postId}/postInteractions/{id}")]
         public async Task<ActionResult> UpdateReact(int postId, int id, [FromBody] UpdateReactCommand command)
@@ -103,17 +95,17 @@ namespace PostExperience.Presentation.API.Controllers.Posts
         #endregion
 
         #region Queries
-        [HttpGet("GetAllPosts")]
+        [HttpGet("getAllPosts")]
         public async Task<ActionResult<List<GetAllPostsDto>>> GetAllPosts()
         {
             var posts = await _mediator.Send(new GetAllPostsQuery());
             return Ok(posts);
         }
 
-        [HttpGet("GetPostById/{postId}")]
-        public async Task<ActionResult<List<Post>>> GetPostById(int postId)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<Post>>> GetPostById(int id)
         {
-            var post = await _mediator.Send(new GetPostDetailsQuery { PostId = postId });
+            var post = await _mediator.Send(new GetPostDetailsQuery { Id = id });
             return Ok(post);
         }
 

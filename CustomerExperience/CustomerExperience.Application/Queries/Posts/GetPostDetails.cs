@@ -28,7 +28,7 @@ namespace CustomerExperience.Application.Queries.Posts
         #region Query
         public class GetPostDetailsQuery : IRequest<PostWithInteractionsDto>
         {
-            public int PostId { get; set; }
+            public int Id { get; set; }
         }
         #endregion
 
@@ -50,7 +50,7 @@ namespace CustomerExperience.Application.Queries.Posts
 
             public async Task<PostWithInteractionsDto>Handle(GetPostDetailsQuery command, CancellationToken cancellationToken)
             {
-                var postsWithInteractions = await _postRepository.GetByIdAsync(command.PostId,pi => pi.PostInteractions);
+                var postsWithInteractions = await _postRepository.GetByIdAsync(command.Id,pi => pi.PostInteractions);
                 TypeAdapterConfig<Post, PostWithInteractionsDto>
                 .ForType()
                 .Map(dest => dest.Interactions, src => src.PostInteractions);
