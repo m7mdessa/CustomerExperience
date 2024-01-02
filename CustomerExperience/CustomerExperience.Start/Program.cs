@@ -30,7 +30,7 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddHostedService<ConsumerService>();
+//builder.Services.AddHostedService<ConsumerService>();
 
 
 builder.Services.AddMapster();

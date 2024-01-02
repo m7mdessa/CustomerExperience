@@ -95,7 +95,7 @@ namespace PostExperience.Presentation.API.Controllers.Posts
         #endregion
 
         #region Queries
-        [HttpGet("getAllPosts")]
+        [HttpGet]
         public async Task<ActionResult<List<GetAllPostsDto>>> GetAllPosts()
         {
             var posts = await _mediator.Send(new GetAllPostsQuery());
