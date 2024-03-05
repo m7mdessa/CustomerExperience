@@ -8,13 +8,13 @@ namespace CustomerExperience.Core.Application.Commands.CreateUser
     internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Unit>
     {
         private readonly IRoleRepository _roleRepository;
-        //private readonly IBus _bus;
+        private readonly IBus _bus;
 
-        public CreateUserCommandHandler(IRoleRepository roleRepository/*, IBus bus*/)
+        public CreateUserCommandHandler(IRoleRepository roleRepository, IBus bus)
         {
 
             _roleRepository = roleRepository;
-            //_bus = bus;
+            _bus = bus;
 
         }
       
@@ -24,29 +24,29 @@ namespace CustomerExperience.Core.Application.Commands.CreateUser
             role.AddUser(command.UserName , command.Password, command.RoleId, command.CustomerId);
             await _roleRepository.UpdateAsync(role);
 
-            //var userAdded = new UserAdded
-            //{
-                
-            //    UserName = command.UserName,
-            //    CustomerId = command.CustomerId,
+            var userAdded = new UserAdded
+            {
 
-            //};
+                UserName = command.UserName,
+                CustomerId = command.CustomerId,
 
-            //await _bus.Publish(userAdded);
+            };
+
+            await _bus.Publish(userAdded);
             return Unit.Value;
         }
 
     }
 
 
-    //public class UserAdded
-    //{
-     
-    //    public string? UserName { get; set; }
-    //    public int CustomerId { get; set; }
+    public class UserAdded
+    {
+
+        public string? UserName { get; set; }
+        public int CustomerId { get; set; }
 
 
-    //}
+    }
 
 
 

@@ -5,7 +5,7 @@ using CustomerExperience.Core.Application.DTO;
 using CustomerExperience.Core.Domain.RoleAggregate;
 using CustomerExperience.Core.Infra;
 using CustomerExperience.Core.Infra.Repositories;
-//using CustomerExperience.Core.Infra.Services;
+using CustomerExperience.Core.Infra.Services;
 using Mapster;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,9 +29,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-//builder.Services.AddSingleton<UserAddedConsumer>();
+builder.Services.AddSingleton<UserAddedConsumer>();
 
-//builder.Services.AddSingleton<ProducerService>();
+builder.Services.AddSingleton<ProducerService>();
 
 builder.Services.AddMapster();
 
