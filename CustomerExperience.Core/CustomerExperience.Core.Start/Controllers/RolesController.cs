@@ -59,7 +59,7 @@ namespace CustomerExperience.Core.Start.Controllers
         .FallbackAsync((result) =>
         {
             // Handle fallback logic here
-            return Task.FromResult(StatusCode(500, "Fallback response"));
+            return Task.FromResult(StatusCode(400, "Fallback response"));
         });
 
             var result = await fallbackPolicy
