@@ -90,7 +90,7 @@ builder.Host
         x.AddRider(r =>
         {
             x.AddConsumer<UserAddedConsumer>();
-          
+
 
             var topicName = "UserCreated";
 
@@ -98,7 +98,7 @@ builder.Host
             {
             });
 
-          
+
             r.UsingKafka((context, cfg) =>
             {
                 cfg.Host(kafkaBrokerServer);
@@ -137,12 +137,7 @@ builder.Host
 
 
 
-
-
-
-
 var app = builder.Build();
-
 
 
 // Configure the HTTP request pipeline.
