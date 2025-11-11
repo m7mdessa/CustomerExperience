@@ -1,39 +1,3 @@
-    public class AuditLog
-    {
-        public string? FieldName { get; set; }
-
-        public string? OldValue { get; set; }
-        public string? NewValue { get; set; }
-
-        public string? OldName { get; set; }
-        public string? NewName { get; set; }
-    }
-        public class AuditTrail : AuditableSoftDeleteEntity
-    {
-        public required Guid EntityId { get; set; }
-        public required string EntityName { get; set; }
-        public required string ActionTypeCode { get; set; }
-        public string? ChangesDetails { get; set; }
-        public string? UserName { get; set; }
-        public required DateTime CreatedOn { get; set; }
-        public List<AuditLog>? Changes { get; set; }
-
-        public virtual List<AuditTrailRelation>? AuditTrailRelations { get; set; }
-    }
-
-        public class AuditTrailRelation : AuditableSoftDeleteEntity
-    {
-        public Guid? EntityId { get; set; }
-        public string? EntityName { get; set; }
-        public string? RelationName { get; set; }
-        public string? ActionTypeCode { get; set; }
-        public Guid? RelatedEntityId { get; set; }
-        public string? ChangesDetails { get; set; }
-        public List<AuditLog>? Changes { get; set; }
-
-        public Guid? AuditTrailId { get; set; }
-        public virtual AuditTrail? AuditTrail { get; set; }
-    }
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -48,34 +12,51 @@ public class AuditSaveChangesInterceptor : SaveChangesInterceptor
         _currentUser = currentUser;
     }
 
+    // Synchronous
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
         InterceptionResult<int> result)
     {
-        if (eventData.Context is not AppDbContext dbContext)
-            return base.SavingChanges(eventData, result);
+        if (eventData.Context is AppDbContext dbContext)
+            ProcessAuditEntries(dbContext);
 
+        return base.SavingChanges(eventData, result);
+    }
+
+    // Asynchronous
+    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
+    {
+        if (eventData.Context is AppDbContext dbContext)
+            ProcessAuditEntries(dbContext);
+
+        return await base.SavingChangesAsync(eventData, result, cancellationToken);
+    }
+
+    private void ProcessAuditEntries(AppDbContext dbContext)
+    {
         var auditTrails = new List<AuditTrail>();
 
         foreach (var entry in dbContext.ChangeTracker.Entries()
                      .Where(e => e.State is EntityState.Added or EntityState.Modified or EntityState.Deleted))
         {
-            var entityType = entry.Entity.GetType();
             var entityId = GetEntityKeyValue(entry.Entity);
             if (entityId == Guid.Empty) continue;
 
-            // 1️⃣ Create AuditTrail for main entity
+            // Main entity audit
             var auditTrail = new AuditTrail
             {
                 EntityId = entityId,
-                EntityName = entityType.Name,
+                EntityName = entry.Entity.GetType().Name,
                 ActionTypeCode = entry.State.ToString(),
                 CreatedOn = DateTime.UtcNow,
                 UserName = _currentUser,
                 Changes = GetFieldChanges(entry)
             };
 
-            // 2️⃣ Detect M-M or child relations
+            // Handle M-M / child relations
             var auditRelations = new List<AuditTrailRelation>();
 
             foreach (var coll in entry.Collections)
@@ -90,7 +71,7 @@ public class AuditSaveChangesInterceptor : SaveChangesInterceptor
                     auditRelations.Add(new AuditTrailRelation
                     {
                         EntityId = entityId,
-                        EntityName = entityType.Name,
+                        EntityName = entry.Entity.GetType().Name,
                         RelationName = coll.Metadata.Name,
                         ActionTypeCode = "RelationAdded",
                         RelatedEntityId = GetEntityKeyValue(target),
@@ -104,7 +85,7 @@ public class AuditSaveChangesInterceptor : SaveChangesInterceptor
                     auditRelations.Add(new AuditTrailRelation
                     {
                         EntityId = entityId,
-                        EntityName = entityType.Name,
+                        EntityName = entry.Entity.GetType().Name,
                         RelationName = coll.Metadata.Name,
                         ActionTypeCode = "RelationRemoved",
                         RelatedEntityId = GetEntityKeyValue(target),
@@ -120,8 +101,6 @@ public class AuditSaveChangesInterceptor : SaveChangesInterceptor
 
         if (auditTrails.Count > 0)
             dbContext.Set<AuditTrail>().AddRange(auditTrails);
-
-        return base.SavingChanges(eventData, result);
     }
 
     private static Guid GetEntityKeyValue(object entity)
